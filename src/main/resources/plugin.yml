@@ -1,0 +1,9 @@
+name: ChatAnimator
+version: '1.0-SNAPSHOT'
+main: com.TheZeR01.chatanim.ChatAnim
+api-version: '1.18'
+commands:
+  chatanim:
+    description: Comando principal del plugin de animaciones
+    usage: /chatanim <play|reload>
+    permission: chatanim.admin
