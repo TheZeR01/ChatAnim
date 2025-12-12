@@ -20,7 +20,6 @@ public class AnimCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        // Validación básica de argumentos
         if (args.length == 0) {
             sender.sendMessage(ColorUtils.colorize("&cUso: /chatanim <play|reload> [args...]"));
             return true;
@@ -28,7 +27,7 @@ public class AnimCommand implements CommandExecutor {
 
         String subCommand = args[0].toLowerCase();
 
-        // --- SUBCOMANDO: RELOAD ---
+        // --- RELOAD ---
         if (subCommand.equals("reload")) {
             if (!sender.hasPermission("chatanim.admin")) {
                 sender.sendMessage(ColorUtils.colorize("&cNo tienes permiso."));
@@ -40,9 +39,8 @@ public class AnimCommand implements CommandExecutor {
             return true;
         }
 
-        // --- SUBCOMANDO: PLAY ---
+        // --- PLAY ---
         if (subCommand.equals("play")) {
-            // Estructura: /chatanim play <jugador> <animacion>
             if (args.length < 3) {
                 sender.sendMessage(ColorUtils.colorize("&cUso: /chatanim play <jugador> <animacion>"));
                 return true;
@@ -62,8 +60,7 @@ public class AnimCommand implements CommandExecutor {
                 return true;
             }
 
-            // Verificar permisos específicos de la animación (definido en el YML de la animación)
-            // Si el sender es consola, ignoramos permisos. Si es jugador, verificamos.
+            // Permisos
             if (sender instanceof Player && anim.getPermission() != null && !anim.getPermission().isEmpty()) {
                 if (!sender.hasPermission((String) anim.getPermission())) {
                     sender.sendMessage(ColorUtils.colorize("&cNo tienes permiso para usar esta animación."));
@@ -71,11 +68,9 @@ public class AnimCommand implements CommandExecutor {
                 }
             }
 
-            // Obtener el mensaje final desde config.yml
             String endMsg = plugin.getConfig().getString("messages.end-animation", "");
 
-            // INICIAR LA TAREA
-            // anim.getSpeed() define los ticks (velocidad)
+
             new AnimationTask(target, anim, endMsg).runTaskTimer(plugin, 0L, anim.getSpeed());
 
             sender.sendMessage(ColorUtils.colorize("&aReproduciendo animación &e" + animName + "&a para &e" + target.getName()));

@@ -2,42 +2,55 @@ package com.TheZeR01.chatanim;
 import com.TheZeR01.chatanim.commands.AnimCommand;
 import com.TheZeR01.chatanim.managers.AnimationManager;
 
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ChatAnim extends JavaPlugin {
     private AnimationManager animationManager;
 
+    private void registerCommand(String name, AnimCommand commandExecutor) {
+        if (this.getCommand(name) != null) {
+            this.getCommand(name).setExecutor(commandExecutor);
+        } else {
+            getLogger().severe("Error: El comando '" + name + "' no está definido en plugin.yml");
+        }
+    }
+
+    private void registerListener(Listener listener) {
+        this.getServer().getPluginManager().registerEvents(listener, this);
+    }
+
     @Override
     public void onEnable() {
-        // 1. Cargar Configuración predeterminada (config.yml)
-        saveDefaultConfig();
+        // 3. Inicialización limpia
+        getLogger().info("Iniciando ChatAnimator...");
 
-        // 2. Inicializar Managers
+        // Cargar Configuración
+        this.saveDefaultConfig();
+
+        // Instanciar Managers
         this.animationManager = new AnimationManager(this);
 
-        // 3. Cargar Animaciones desde la carpeta
+        // Cargar Datos
         this.animationManager.loadAnimations();
 
-        // 4. Registrar Comandos
-        // Asegúrate de que "chatanim" esté en tu plugin.yml
-        if (getCommand("chatanim") != null) {
-            getCommand("chatanim").setExecutor(new AnimCommand(this));
-        } else {
-            getLogger().severe("¡Olvidaste registrar el comando 'chatanim' en el plugin.yml!");
-        }
+        // Registrar Comandos
+        this.registerCommand("chatanim", new AnimCommand(this));
 
-        getLogger().info("ChatAnimator activado correctamente.");
+        // Registrar Eventos
+        // this.eventListener(new EventListener(this));
+
+        getLogger().info("¡ChatAnimator cargado correctamente!");
     }
 
     @Override
     public void onDisable() {
-        // Bukkit se encarga de cancelar las tareas (tasks),
-        // pero aquí podrías guardar datos si fuera necesario.
+        this.animationManager = null;
         getLogger().info("ChatAnimator desactivado.");
     }
 
-    // Getter para que otras clases (como los comandos) accedan al manager
+    // 4. Getters Seguros
     public AnimationManager getAnimationManager() {
-        return animationManager;
+        return this.animationManager;
     }
 }

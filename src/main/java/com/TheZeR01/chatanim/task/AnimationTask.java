@@ -29,20 +29,17 @@ public class AnimationTask extends BukkitRunnable {
             return;
         }
 
-        // Limpiar chat si está activado en la anim
         if (animation.isClearChat()) {
             for (int i = 0; i < 100; i++) player.sendMessage("");
         }
 
-        // Centrado vertical (relleno arriba)
+
         if (animation.isCentered()) {
             player.sendMessage("\n\n\n\n");
         }
 
-        // Enviar el frame actual
         player.sendMessage(animation.getFrames().get(currentFrame));
 
-        // Centrado vertical (relleno abajo)
         if (animation.isCentered()) {
             player.sendMessage("\n\n\n\n");
         }

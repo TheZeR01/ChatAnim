@@ -12,13 +12,12 @@ public class Animation {
     private final String permission; // <--- NUEVO CAMPO
     private final List<String> frames;
 
-    // Constructor actualizado
     public Animation(String name, int speed, boolean clearChat, boolean centered, String permission, List<String> rawFrames) {
         this.name = name;
         this.speed = speed;
         this.clearChat = clearChat;
         this.centered = centered;
-        this.permission = permission; // <--- GUARDAMOS EL PERMISO
+        this.permission = permission;
         this.frames = new ArrayList<>();
 
         for (String frame : rawFrames) {

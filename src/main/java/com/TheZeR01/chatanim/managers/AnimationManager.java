@@ -29,18 +29,14 @@ public class AnimationManager {
                 YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
                 String name = file.getName().replace(".yml", "");
 
-                // Leer settings
                 int speed = config.getInt("settings.speed", 2);
                 boolean clear = config.getBoolean("settings.clear-chat-on-frame", true);
                 boolean center = config.getBoolean("settings.vertical-center", true);
 
-                // Leer permiso (si no existe, devuelve null)
                 String permission = config.getString("settings.permission");
 
-                // Leer frames
                 List<String> rawFrames = config.getStringList("frames");
 
-                // Pasamos "permission" al constructor
                 Animation anim = new Animation(name, speed, clear, center, permission, rawFrames);
 
                 animations.put(name, anim);
