@@ -18,7 +18,7 @@ Un motor para renderizar animaciones ASCII fluidas en el chat de Minecraft, supe
 
 ![demo2](https://github.com/user-attachments/assets/a8103563-10c4-4af3-8bc5-87c1a3bb08cc)
 ## ⚠️ Estado del Proyecto
-Actualmente es una **Prueba de Concepto**. No recomendado para servidores en producción masiva todavía.
+Actualmente es una **Prueba de Concepto**. No recomendado para servidores en producción todavía.
 
 ## 📝 Licencia
 Este proyecto está bajo la licencia MIT.
