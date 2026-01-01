@@ -3,7 +3,7 @@
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
-
+## 🌟 Descripcion
 Un motor para renderizar animaciones ASCII fluidas en el chat de Minecraft, superando las limitaciones de refresco del cliente.
 
 
